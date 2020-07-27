@@ -2,14 +2,15 @@
 Contributors: Qwerty23
 Donate link: http://in-web.co.kr
 Plugin URI: http://in-web.co.kr
-Tags: Wordpress Korean Media Library Upload File Type, 업로드 파일 타입
+Tags: Wordpress Korean Media Library Upload File Type, 업로드 파일 타입, Rocket Upload File Type
 Requires at least: 3.5.1
-Tested up to: 4.9.4
+Tested up to: 5.4.2
 Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-wordpress 에서 업로드를 허용할 파일 타입을 설정할 수 있는 플러그인 입니다. 
+wordpress 에서 업로드를 허용할 파일 타입을 설정할 수 있는 플러그인 입니다.
+또한 Wordpress에서 파일 업로드와 관련된 몇가지 유용한 기능을 넣었습니다.
 
 == Description ==
 
@@ -18,12 +19,12 @@ wordpress 에서 업로드를 허용할 파일 타입을 설정할 수 있는 �
 1. wordpress 의 미디어 라이브러리(자료실)에서 업로드를 허용할 파일을 설정할 수 있습니다. 예를들어 hwp 확장자의 파일이 업로드가 안될경우 사용하시면 됩니다.
 2. 미디어 라이브러리에서  특정 확장자의 파일 목록을 볼 수 있습니다. 예를들어 hwp 파일만 목록에 표시할 수 있습니다.
 3. 한글 파일명을 자동으로 영문으로 전환 후 업로드 할 수 있습니다.
-4. 3의 확장으로 네이버 번역 API 를 이용해 한글 파일명을 자동으로 영문으로 전환할 수 있습니다.(하루에 10000 글자 제한이 있습니다.) 예를들어 파일명이 "오렌지.jpg" 라면  "orange.jpg" 로 자동 번역되어 업로드 됩니다.
+4. 3의 확장으로 네이버 파파고 API 를 이용해 한글 파일명을 자동으로 영문으로 전환할 수 있습니다.(하루에 10000 글자 제한이 있습니다.) 예를들어 파일명이 "오렌지.jpg" 라면  "orange.jpg" 로 자동 번역되어 업로드 됩니다.
 의미없는 영문자보다는 그래도 어느정도 알아볼 수 있게 파일명을 바꾸고 싶다면 이 옵션을 사용하시면 됩니다.
 
 설정은 간단합니다. 업로드를 허용하고 싶은 파일 타입을 선택한 후 저장하면 끝입니다.
 
-= 선택 가능한 파일 확장자 종류 =
+## 선택 가능한 파일 확장자 종류
 
 * hwp
 * bmp
@@ -45,8 +46,20 @@ wordpress 에서 업로드를 허용할 파일 타입을 설정할 수 있는 �
 * svg
 * json
 
-만약 업로드하고 싶은 파일이 이 플러그인에 없다면 [댓글](http://in-web.co.kr/wordpress/plug-in/wordpress-%ec%97%85%eb%a1%9c%eb%93%9c-%ed%99%95%ec%9e%a5%ec%9e%90-%ec%b6%94%ea%b0%80-rocket-media-library-mime-type/) 을 통해 저에게 알려주세요. 검토 후 추가하겠습니다.
 
+## 문의 및 건의사항
+
+기타 플러그인을 사용중에 버그를 발견했다던지 문의 및 업로드 파일 타입, 기능 추가등의 건의사항이 있다면
+1. 1. [블로그 플러그인 소개글](https://in-web.co.kr/wordpress/plug-in/wordpress-%ec%97%85%eb%a1%9c%eb%93%9c-%ed%99%95%ec%9e%a5%ec%9e%90-%ec%b6%94%ea%b0%80-rocket-media-library-mime-type/) (회원가입 불필요) 
+2. [깃허브 이슈 게시판](https://github.com/qwerty23/rocket-media-library-mime-type/issues) (깃허브 계정 필요) 
+을 통해 저에게 알려주세요. 검토 후 추가하겠습니다.
+
+
+## 참고
+
+아래는 워드프레스에서 한글 폰트를 보다 쉽게 설정/사용할 수 있는 플러그인입니다.
+- <a href="https://wordpress.org/plugins/rocket-font" target="_blank">로켓폰트 플러그인 워드프레스 사이트 링크</a>
+- <a href="https://github.com/qwerty23/rocket-font" target="_blank">로켓폰트 깃허브 사이트 링크</a>
 
 == Installation ==
 

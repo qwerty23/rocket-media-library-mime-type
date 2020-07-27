@@ -91,9 +91,8 @@
 			<div class="large-12 columns">
 				<div class="panel callout radius">
 					<h5>참고 : <span class="radius secondary label custom-label"><?php echo site_url();?></span> 사이트의 업로드 관련 설정값</h5>
-					Max Upload Size <i class="fa fa-question-circle fa-c2x tooltips" title="<b>한번에 업로드 가능한 파일의 최대 사이즈</b>입니다.<br><span class='round info label'>php.ini</span>파일에서 <span class='round info label'>upload_max_filesize</span>항목으로 값을 조정할 수 있습니다.<br>설정을 변경했다면 서버를 재시작해야 적용되며<br>아래의 <span class='round info label'>post_max_size</span> 값과 같게 설정하면 됩니다."></i> : <?php echo size_format( wp_max_upload_size() );?>
-					<p>PHP Post Max Size <i class="fa fa-question-circle fa-c2x tooltips" title="<b>한번에 전송 가능한 폼값의 최대 사이즈</b>입니다.<br><span class='round info label'>php.ini</span>파일에서 <span class='round info label'>post_max_size</span>항목으로 값을 조정할 수 있습니다.<br>설정을 변경했다면 서버를 재시작해야 적용되며<br>위의 <span class='round info label'>upload_max_size</span> 값과 같게 설정하면 됩니다."></i> : <?php echo $post_max_size;?></p>
-					<!-- <p>wordpress 업로드 용량 설정하는 법에 대해 더 자세히 알고 싶으면 <a href="http://rocketpress.kr/wordpress-tips/5886/" target="_blank">이곳</a> 을 클릭하세요.</p> -->
+					Max Upload Size <i class="fa fa-question-circle fa-c2x tooltips" title="<b>한번에 업로드 가능한 파일의 최대 사이즈</b>입니다.<br><span class='round info label'>php.ini</span>파일에서 <span class='round info label'>upload_max_filesize</span>항목으로 값을 조정할 수 있습니다.<br>설정을 변경했다면 서버를 재시작해야 적용되며<br>아래의 <span class='round info label'>post_max_size</span> 값과 같게 설정하면 됩니다.<br><br>호스팅 서비스를 사용하는 경우 관리자 메뉴에서 설정할수 있는지 확인해보시고<br>없다면 서버 관리자에 문의해 보세요."></i> : <?php echo size_format( wp_max_upload_size() );?>
+					<p>PHP Post Max Size <i class="fa fa-question-circle fa-c2x tooltips" title="<b>한번에 전송 가능한 폼값의 최대 사이즈</b>입니다.<br>마찬가지로 <span class='round info label'>php.ini</span>파일에서 <span class='round info label'>post_max_size</span>항목으로 값을 조정할 수 있습니다.<br>설정을 변경했다면 서버를 재시작해야 적용되며<br>위의 <span class='round info label'>upload_max_size</span> 값과 같게 설정하면 됩니다."></i> : <?php echo $post_max_size;?></p>
 				</div>
 			</div>
 		</div>
@@ -131,7 +130,7 @@
 					</tr>
 					
 					<tr class="file-translate-options">
-						<th width="80%">3. 한글 파일을 영문으로 변환시 네이버 번역 API를 이용해 변환<i class="fa fa-question-circle fa-c2x tooltips" title="예) 사과.jpg -> Apple.jpg<br>2번 옵션을 사용할경우 Apple__2020-07-23-19-07-03.jpg<br><br>이 옵션을 사용하면 네이버 파파고의 번역 API를 이용해 한글 파일명을 영문으로 번역합니다. <br>아래의 네이버의 Client ID 와 Client Secret 입력이 필요합니다."></i></th>
+						<th width="80%">3. 한글 파일을 영문으로 변환시 네이버 파파고 API를 이용해 자동으로 번역해서 변환<i class="fa fa-question-circle fa-c2x tooltips" title="예) 사과.jpg -> Apple.jpg<br>2번 옵션을 사용할경우 Apple__2020-07-23-19-07-03.jpg<br><br>이 옵션을 사용하면 네이버 파파고의 번역 API를 이용해 한글 파일명을 영문으로 번역합니다. <br>아래의 네이버의 Client ID 와 Client Secret 입력이 필요합니다."></i></th>
 						<td>
 							<div class="switch round">
 								<input id="change_filename_use_naver_api" name="change_filename_use_naver_api" type="checkbox" <?php checked( $options['change_filename_use_naver_api'], "on" ); ?>>
