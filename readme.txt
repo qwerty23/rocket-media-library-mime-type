@@ -2,7 +2,7 @@
 Contributors: Qwerty23
 Donate link: http://in-web.co.kr
 Plugin URI: http://in-web.co.kr
-Tags: Wordpress Korean Media Library Upload File Type, 업로드 파일 타입, Rocket Upload File Type
+Tags: Wordpress Korean Media Library Upload File Type, 업로드 파일 타입, Rocket Upload File Type, Rocket Media
 Requires at least: 3.5.1
 Tested up to: 5.4.2
 Stable tag: 2.0.1
