@@ -10,9 +10,10 @@
 </p>
 
 Wordpress 에서 설정만으로 업로드 가능한 파일 종류를 추가할 수 있는 플러그인 입니다.
-또한 Wordpress에서 파일 업로드와 관련된 몇가지 기능을 넣었습니다.
+또한 Wordpress에서 파일 업로드와 관련된 몇가지 유용한 기능을 넣었습니다.
 
 <a href="https://wordpress.org/plugins/rocket-media-library-mime-type">업로드 파일 타입 추가 워드프레스 플러그인 사이트 링크</a>
+
 
 ## 특징
 
@@ -27,6 +28,31 @@ Wordpress 에서 설정만으로 업로드 가능한 파일 종류를 추가할 
 충분히 사용할수 있는 글자수이지만 무제한은 아니라는점 염두에 두시면 되겠습니다.
 
 한글 파일명을 의미없는 영문자보다는 그래도 어느정도 알아볼 수 있게 바꾸고 싶을때 이 옵션을 사용하시면 됩니다. 이 경우 [**네이버 파파고 API**](https://developers.naver.com/products/nmt/) 에서 `Client ID`와 `Client Secret`을 발급받아서 저장해야 합니다.
+
+
+## 현재 선택 가능한 파일 종류
+
+* hwp
+* bmp
+* doc
+* ico
+* xla, xls, xlt, xlw
+* pot, pps, ppt
+* ppam
+* pptm
+* pptx
+* psd
+* mp4
+* webm
+* ogv
+* csv
+* ai,eps,ps
+* txt
+* xlsx
+* svg
+* json
+* exe
+
 
 ## 설치
 
@@ -44,6 +70,7 @@ Wordpress 에서 설정만으로 업로드 가능한 파일 종류를 추가할 
 4. 한글 파일명 자동변환을 사용하려면 **파일 업로드시 한글 파일명을 자동으로 영문으로 변환** 옵션을 활성화하고 저장 > 미디어에서 테스트
 5. 한글 파일명 자동 번역 변환을 사용하려면 [**네이버 파파고 API**](https://developers.naver.com/products/nmt/) 에서 `Client ID`와 `Client Secret`를 발급받아서 입력 저장후 미디어에서 테스트
 
+
 ## 문의 및 건의사항
 
 기타 플러그인을 사용중에 버그를 발견했다던지 문의 및 업로드 파일 타입, 기능 추가등의 건의사항이 있다면
@@ -52,11 +79,13 @@ Wordpress 에서 설정만으로 업로드 가능한 파일 종류를 추가할 
 
 에 글 남겨주시면 검토후 반영해 보겠습니다.
 
+
 ## 참고
 
 아래는 워드프레스에서 한글 폰트를 보다 쉽게 설정/사용할 수 있는 플러그인입니다.
 - <a href="https://wordpress.org/plugins/rocket-font" target="_blank">로켓폰트 플러그인 워드프레스 사이트 링크</a>
 - <a href="https://github.com/qwerty23/rocket-font" target="_blank">로켓폰트 깃허브 사이트 링크</a>
+
 
 ## LICENSE
 [GPL-2.0 license](https://opensource.org/licenses/GPL-2.0)
