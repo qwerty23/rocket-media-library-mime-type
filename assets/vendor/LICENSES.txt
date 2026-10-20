@@ -1,0 +1,15 @@
+이 폴더에는 설정 화면에서 사용하는 오픈소스 라이브러리가 포함되어 있습니다. 외부 사이트에서 불러오지 않고 이 플러그인에 포함된 파일만 사용합니다.
+
+rocket-libs/rocket-libs.min.css  (모든 선택자에 .rocket-mlmt-scope 를 붙여 설정 화면 안에서만 적용되도록 변환함)
+  - Foundation 5.5.1 (css/foundation.min.css, css/normalize.css) - MIT License - https://get.foundation/
+  - normalize.css - MIT License
+  - jQuery PowerTip 1.2.0 (css) - MIT License - https://stevenbenner.github.io/jquery-powertip/
+
+rocket-libs/rocket-libs.min.js
+  - Modernizr 2.8.3 - MIT and BSD licenses - https://modernizr.com/
+  - Foundation 5.5.1 (js/foundation.min.js) - MIT License
+  - jQuery PowerTip 1.2.0 - MIT License
+
+fontawesome/
+  - Font Awesome 4.5.0 by Dave Gandy - https://fontawesome.io/
+    CSS : MIT License / Fonts : SIL OFL 1.1 License (https://scripts.sil.org/OFL)

@@ -1,35 +1,46 @@
 <?php
-/*
- *	Plugin Name: 	Rocket Media Library Mime Type
- *  Plugin URI:  	http://rocketpress.kr/wp-plugin/5760/
- *	Description:    한국 유저를 위한 업로드 파일타입 추가 플러그인. hwp 확장자 및 미디어에 업로드하길 원하는 파일 타입을 추가할 수 있습니다.  
- *	Author:         <a href="http://in-web.co.kr/">Qwerty23</a> & <a href="http://rocketpress.kr/">RocketPress</a>
- *	Version: 		2.0.1
- *	Text Domain: 	RocketMLMT
- *	Domain Path: 	languages/
+/**
+ * Plugin Name:       Rocket Media Library Mime Type
+ * Plugin URI:        http://in-web.co.kr/wordpress/plug-in/wordpress-%ec%97%85%eb%a1%9c%eb%93%9c-%ed%99%95%ec%9e%a5%ec%9e%90-%ec%b6%94%ea%b0%80-rocket-media-library-mime-type/
+ * Description:       한국 유저를 위한 업로드 파일타입 추가 플러그인. hwp 확장자 및 미디어에 업로드하길 원하는 파일 타입을 추가할 수 있습니다. (Choose which file types can be uploaded to the media library.)
+ * Version:           3.0.0
+ * Requires at least: 5.0
+ * Requires PHP:      7.0
+ * Author:            Qwerty23
+ * Author URI:        http://in-web.co.kr/
+ * License:           GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       RocketMLMT
+ * Domain Path:       /languages
  */
 
 namespace rocket_media_library_mime_type;
 
-define( 'rocket_media_library_mime_type\VERSION', '2.0.1' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // 직접 접근 차단
+}
+
+define( 'rocket_media_library_mime_type\VERSION', '3.0.0' );
+define( 'rocket_media_library_mime_type\PLUGIN_FILE', __FILE__ );
 define( 'rocket_media_library_mime_type\PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'rocket_media_library_mime_type\PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'rocket_media_library_mime_type\PLUGIN_PREFIX'	, 'RocketMLMT');
-define( 'rocket_media_library_mime_type\PLUGIN_MENU_SLUG'	, 'rocket-media-library-mime-type-setting');
+define( 'rocket_media_library_mime_type\PLUGIN_PREFIX', 'RocketMLMT' );
+define( 'rocket_media_library_mime_type\PLUGIN_MENU_SLUG', 'rocket-media-library-mime-type-setting' );
 
-require_once( 'features/feature.php' );
-require_once( 'features/template.php' );
-require_once( 'features/options.php' );
-require_once( 'features/class-loader.php' );
-require_once( 'features/plugin-set.php' );
+require_once PLUGIN_DIR . 'features/feature.php';
+require_once PLUGIN_DIR . 'features/template.php';
+require_once PLUGIN_DIR . 'features/options.php';
+require_once PLUGIN_DIR . 'features/class-loader.php';
+require_once PLUGIN_DIR . 'features/plugin-set.php';
 
 class RocketMediaLibraryMimeType extends Plugin_Set {
 
 	private static $__instance;
 
 	public static function init() {
-		if ( !self::$__instance ) {
-			load_plugin_textdomain( PLUGIN_PREFIX, FALSE, PLUGIN_DIR . 'languages' );
+		if ( ! self::$__instance ) {
+			load_plugin_textdomain( PLUGIN_PREFIX, false, dirname( plugin_basename( PLUGIN_FILE ) ) . '/languages' );
+			PluginOptions::upgrade_stored_options();
 			self::$__instance = new RocketMediaLibraryMimeType();
 			parent::initialize();
 		}
@@ -49,33 +60,19 @@ class RocketMediaLibraryMimeType extends Plugin_Set {
 	public static function defaults() {
 
 		$defaults_value = array(
-			"change_filename_kr_to_en"			=> "",
-			"change_filename_use_naver_api"		=> "",
-			"naver_client_id"					=> "",
-			"naver_client_secret"				=> "",
-			"change_filename_add_upload_date"	=> "on",
+			'change_filename_kr_to_en'        => '',
+			'change_filename_add_upload_date' => '',
+			'change_filename_nfc'             => 'on',
+			'restrict_risky_to_admin'         => 'on',
 		);
-		
-		if( class_exists('rocket_media_library_mime_type\MimeType' ) ){
-				
-			$targets = MimeType::get_mime_types();
-			$create_value_names = array("rocket_upload_mime_type_");
-			
-			$create_values = array();
-			foreach($create_value_names as $value_name):
-				
-				foreach($targets as $target => $target_info):
-					
-					$create_values[$value_name . $target] = $target_info["default_value"];
-					
-				endforeach;
-				
-			endforeach;
-			
-			$defaults_value = array_merge($defaults_value, $create_values);
+
+		if ( class_exists( 'rocket_media_library_mime_type\MimeType' ) ) {
+
+			foreach ( MimeType::get_mime_types() as $target => $target_info ) {
+				$defaults_value[ 'rocket_upload_mime_type_' . $target ] = $target_info['default_value'];
+			}
 		}
-		
-		
+
 		return $defaults_value;
 	}
 
@@ -85,27 +82,18 @@ class RocketMediaLibraryMimeType extends Plugin_Set {
 	 * 플러그인 활성화시 실행
 	 *
 	 * @static
-	 * @hook register_activation_hook
 	 */
 	public static function activate_plugin() {
-		
 	}
-	
+
 	/**
 	 * Plugin deactivation hook
 	 *
 	 * 플러그인 비활성화시 실행
 	 *
 	 * @static
-	 * @hook register_deactivation_hook
 	 */
 	public static function deactivate_plugin() {
-		$dismissed_pointers = explode( ',', get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
-
-		if( in_array( 'rocket_media_upload_file_settings_pointer', $dismissed_pointers ) ) {
-			unset($dismissed_pointers[array_search("rocket_media_upload_file_settings_pointer",$dismissed_pointers)]);
-			update_user_meta(get_current_user_id(),'dismissed_wp_pointers',$dismissed_pointers);
-		}
 	}
 
 } // End Class

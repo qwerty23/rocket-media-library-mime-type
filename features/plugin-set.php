@@ -1,6 +1,10 @@
 <?php
 namespace rocket_media_library_mime_type;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // 직접 접근 차단
+}
+
 class Plugin_Set {
 
 	public function __construct() {

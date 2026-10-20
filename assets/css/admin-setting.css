@@ -1,0 +1,65 @@
+/* Rocket Media Library Mime Type : 설정 화면 (이 화면에서만 불러옴)
+ *
+ * 설정 화면은 Foundation 5 로 꾸며져 있다. Foundation 스타일(rocket-libs.min.css)은 모두 .rocket-mlmt-scope 안에서만
+ * 적용되도록 바꾸어 두었으므로, 워드프레스 관리자 메뉴, 상단 바 등 화면 밖에는 영향을 주지 않는다. */
+
+/* 예전 화면은 body 글자 크기가 브라우저 기본값(16px)이었다. 워드프레스 관리자 안에서도 같은 크기로 보이도록 맞춘다 */
+.rocket-mlmt-scope{background:inherit;font-size:16px;}
+
+.rocket-mlmt-scope .fa-question-circle{color:#1E8CBE;}
+.rocket-mlmt-scope .fa-c2x{font-size:1.1em;}
+.rocket-mlmt-scope .rocket-wrap{margin:10px 20px 0px 2px;}
+
+/* foundation */
+.rocket-mlmt-scope ul li ul,.rocket-mlmt-scope ul li ol{margin-left:0px;}
+.rocket-mlmt-scope ul{margin-left:0px;}
+.rocket-mlmt-scope .row{max-width:none;}
+.rocket-mlmt-scope table{width:100%;}
+.rocket-mlmt-scope .custom-label{font-size:1.5rem;}
+.rocket-mlmt-scope .switch-on {
+	position: absolute;
+	left: -55px;
+	top: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 9px;
+}
+
+.rocket-mlmt-scope .switch-off {
+	position: absolute;
+	left: -25px;
+	top: 10px;
+	color: white;
+	font-weight: bold;
+	font-size: 9px;
+}
+.rocket-mlmt-scope input[type="text"],.rocket-mlmt-scope input[type="password"],.rocket-mlmt-scope .switch{margin:inherit;}
+
+/* 한글은 글자 중간이 아니라 띄어쓰기(단어) 단위로 줄을 바꾼다 */
+.rocket-mlmt-scope .rocket-wrap{word-break:keep-all;overflow-wrap:break-word;}
+
+/* 파일 타입 표의 칸 너비 (주의 문구가 길어도 확장자 칸이 좁아지지 않게 한다) */
+.rocket-mlmt-scope .rocket-mlmt-types th:nth-child(1){width:22%;}
+.rocket-mlmt-scope .rocket-mlmt-types th:nth-child(2){width:30%;}
+.rocket-mlmt-scope .rocket-mlmt-types th:nth-child(4){width:12%;}
+
+/* 위험한 형식 안내 */
+.rocket-mlmt-scope .rocket-mlmt-warning{color:#b32d2e;font-size:12px;}
+
+/* 저장 바 : 화면 아래에 항상 표시 */
+.rocket-mlmt-scope .rocket-mlmt-savebar{
+	position:sticky;
+	bottom:0;
+	z-index:10;
+	display:flex;
+	align-items:center;
+	justify-content:flex-end;
+	gap:16px;
+	margin-top:16px;
+	padding:12px 20px;
+	background:#fff;
+	border:1px solid #c3c4c7;
+	border-radius:4px;
+	box-shadow:0 -2px 6px rgba(0,0,0,.06);
+}
+.rocket-mlmt-scope .rocket-mlmt-dirty{margin-right:auto;color:#996800;font-weight:600;}
