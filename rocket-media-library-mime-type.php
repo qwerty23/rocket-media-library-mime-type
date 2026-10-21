@@ -3,15 +3,14 @@
  * Plugin Name:       Rocket Media Library Mime Type
  * Plugin URI:        http://in-web.co.kr/wordpress/plug-in/wordpress-%ec%97%85%eb%a1%9c%eb%93%9c-%ed%99%95%ec%9e%a5%ec%9e%90-%ec%b6%94%ea%b0%80-rocket-media-library-mime-type/
  * Description:       한국 유저를 위한 업로드 파일타입 추가 플러그인. hwp 확장자 및 미디어에 업로드하길 원하는 파일 타입을 추가할 수 있습니다. (Choose which file types can be uploaded to the media library.)
- * Version:           3.0.0
+ * Version:           3.0.1
  * Requires at least: 5.0
  * Requires PHP:      7.0
  * Author:            Qwerty23
  * Author URI:        http://in-web.co.kr/
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       RocketMLMT
- * Domain Path:       /languages
+ * Text Domain:       rocket-media-library-mime-type
  */
 
 namespace rocket_media_library_mime_type;
@@ -20,16 +19,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // 직접 접근 차단
 }
 
-define( 'rocket_media_library_mime_type\VERSION', '3.0.0' );
+define( 'rocket_media_library_mime_type\VERSION', '3.0.1' );
 define( 'rocket_media_library_mime_type\PLUGIN_FILE', __FILE__ );
 define( 'rocket_media_library_mime_type\PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'rocket_media_library_mime_type\PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'rocket_media_library_mime_type\PLUGIN_PREFIX', 'RocketMLMT' );
+define( 'rocket_media_library_mime_type\PLUGIN_PREFIX', 'rocket-media-library-mime-type' );
 define( 'rocket_media_library_mime_type\PLUGIN_MENU_SLUG', 'rocket-media-library-mime-type-setting' );
 
 require_once PLUGIN_DIR . 'features/feature.php';
 require_once PLUGIN_DIR . 'features/template.php';
 require_once PLUGIN_DIR . 'features/options.php';
+require_once PLUGIN_DIR . 'features/core/mime-type.php'; // 활성화할 때도 기본값에 모든 파일 형식이 들어 있도록 미리 불러온다
 require_once PLUGIN_DIR . 'features/class-loader.php';
 require_once PLUGIN_DIR . 'features/plugin-set.php';
 
@@ -39,7 +39,6 @@ class RocketMediaLibraryMimeType extends Plugin_Set {
 
 	public static function init() {
 		if ( ! self::$__instance ) {
-			load_plugin_textdomain( PLUGIN_PREFIX, false, dirname( plugin_basename( PLUGIN_FILE ) ) . '/languages' );
 			PluginOptions::upgrade_stored_options();
 			self::$__instance = new RocketMediaLibraryMimeType();
 			parent::initialize();

@@ -4,113 +4,137 @@ Tags: upload, file type, mime type, hwp, korean
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 3.0.0
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Choose which file types (hwp, svg, csv ...) can be uploaded to the media library, and optionally convert Korean file names to Latin letters (romanization) on upload.
+Choose which file types (hwp, svg, csv ...) can be uploaded to the media library, and convert Korean file names to Latin letters.
 
 == Description ==
 
-워드프레스 업로드와 관련된 유용한 기능을 모은 플러그인입니다. 크게 4가지 기능이 있습니다.
+A small plugin that collects useful upload-related features. It has four main features.
 
-1. 미디어 라이브러리(자료실)에서 **업로드를 허용할 파일 타입을 설정**할 수 있습니다. 예를 들어 hwp 확장자의 파일이 업로드되지 않을 때 사용하세요.
-2. 미디어 라이브러리에서 특정 확장자의 파일 목록만 골라서 볼 수 있습니다. 예) hwp 파일만 목록에 표시
-3. **한글 파일명을 영어(로마자)로 자동 변환**해서 업로드할 수 있습니다. 예) `사과.jpg` > `sagwa.jpg`, `한글 파일.jpg` > `hangeul-pail.jpg`. 파일명 뒤에 **업로드 일시를 붙이는 옵션**(예: `photo__2026-01-31-09-30-00.jpg`)은 따로 쓸 수 있습니다.
-4. **위험한 형식(svg, exe, 매크로 파일)은 관리자만 업로드**하도록 제한할 수 있습니다.
+1. **Choose the file types that may be uploaded** to the media library. For example, use it when hwp (Hangul Word Processor) files are rejected by WordPress.
+2. Filter the media library list by file extension. Example: show only hwp files.
+3. **Automatically convert Korean file names to Latin letters (romanization)** on upload. Example: `사과.jpg` becomes `sagwa.jpg`, and `한글 파일.jpg` becomes `hangeul-pail.jpg`. A separate option appends the **upload date and time** to the file name (for example `photo__2026-01-31-09-30-00.jpg`).
+4. **Restrict risky file types (svg, exe, macro-enabled Office files) to administrators.**
 
-= 한글 파일명 변환 =
+= 한국어 안내 =
 
-한글 글자를 발음에 따라 로마자로 바꿉니다(국립국어원 로마자 표기법의 글자 대응 사용). 번역이 아니므로 `사과` 는 `Apple` 이 아니라 `sagwa` 가 됩니다. **외부 서비스를 사용하지 않고** 서버에서 계산만 하므로 별도의 키나 비용이 필요 없습니다. 발음에 따라 달라지는 규칙(연음 등)은 적용하지 않고 글자마다 그대로 바꿉니다. 예) `신라` > `sinra`
+워드프레스 업로드와 관련된 기능을 모은 플러그인입니다. 설정은 **설정 > 업로드 파일 타입**에서 합니다.
 
-맥(macOS)에서 올린 파일은 한글이 자음과 모음으로 분리되어(NFD) 서버나 윈도우에서 깨져 보이는 경우가 있습니다. 설정의 "맥(macOS)에서 올린 한글 파일명 고치기"를 켜면 올릴 때 정상적인 한글로 합쳐 줍니다.
+* 업로드를 허용할 파일 타입 선택 (hwp, svg, csv 등)
+* 한글 파일명을 로마자로 자동 변환 (예: 사과.jpg > sagwa.jpg). 외부 서비스나 API 키가 필요 없습니다.
+* 파일명 뒤에 업로드 일시 붙이기, 맥(macOS)에서 올린 한글 파일명 고치기
+* 위험한 형식(svg, exe, 매크로 파일)은 관리자만 업로드
 
-= 선택 가능한 파일 확장자 =
+= Korean file name conversion =
 
-hwp, bmp, doc, ico, xla/xls/xlt/xlw, xlsx, pot/pps/ppt, pptx, ppam, pptm, psd, mp4, webm, ogv, csv, ai/eps/ps, txt, svg, json, exe, 그리고 워드프레스 기본 허용 파일(jpg, png, gif, mp3, mov, avi, wmv, mid, pdf, zip, gz)
+Korean letters are converted to Latin letters using the letter table of the Revised Romanization of Korean. This is not a translation: `사과` becomes `sagwa`, not `Apple`. The conversion is calculated on your server, **no external service is used**, and no API key or fee is needed. Pronunciation-dependent rules (such as liaison) are not applied; each letter is converted as it is. Example: `신라` becomes `sinra`.
 
-**보안 안내** : svg, exe, 매크로가 포함될 수 있는 파일(ppam, pptm) 등은 신중하게 허용하세요. 필요한 파일을 올린 뒤에는 이 옵션을 다시 끄는 것을 권장합니다. 설정의 "위험한 형식은 관리자만 업로드"(기본 켜짐)를 쓰면 허용으로 켜 두어도 관리자가 아닌 사용자는 이 형식을 올릴 수 없습니다.
+Files uploaded from macOS often have Korean letters split into consonants and vowels (Unicode NFD), which look broken on servers and Windows. With the option "Fix Korean file names uploaded from macOS" turned on, the letters are combined back into normal Korean when the file is uploaded.
+
+= Selectable file extensions =
+
+hwp, bmp, doc, ico, xla/xls/xlt/xlw, xlsx, pot/pps/ppt, pptx, ppam, pptm, psd, mp4, webm, ogv, csv, ai/eps/ps, txt, svg, json, exe, and the file types WordPress allows by default (jpg, png, gif, mp3, mov, avi, wmv, mid, pdf, zip, gz).
+
+**Security notice**: Allow svg, exe and files that may contain macros (ppam, pptm) with care. After uploading the file you need, turn the option off again. With the option "Only administrators can upload risky file types" (on by default), users who are not administrators cannot upload these types even if they are enabled.
 
 == External services ==
 
-이 플러그인은 외부 서비스에 연결하지 않으며 어떤 데이터도 외부로 보내지 않습니다. 설정 화면도 플러그인에 포함된 CSS 와 JavaScript 만 사용합니다.
+This plugin does not connect to any external service and does not send any data outside your site. The settings screen uses only the CSS and JavaScript files included in the plugin.
 
 == Installation ==
 
-일반적인 워드프레스 플러그인 설치와 같습니다.
+The installation is the same as for any WordPress plugin.
 
-1. 플러그인 폴더(`rocket-media-library-mime-type`)를 `/wp-content/plugins/` 에 올리거나, 관리자 화면의 플러그인 검색에서 설치합니다.
-2. 플러그인을 활성화합니다.
-3. **설정 > 업로드 파일 타입** 에서 업로드를 허용할 파일 타입을 선택하고 저장합니다.
+1. Upload the plugin folder (`rocket-media-library-mime-type`) to `/wp-content/plugins/`, or install it from the plugin search in the admin screen.
+2. Activate the plugin.
+3. Go to **Settings > Upload File Types**, choose the file types you want to allow, and save.
 
 == Frequently Asked Questions ==
 
-= hwp 파일이 업로드되지 않아요 =
+= My hwp file is not uploaded =
 
-**설정 > 업로드 파일 타입** 에서 hwp 를 허용으로 켜고 저장한 뒤 **미디어** 에서 다시 올려 보세요. 3.0.0 부터는 워드프레스가 파일 내용으로 판별한 형식 때문에 막히던 hwp 파일도 허용됩니다.
+Go to **Settings > Upload File Types**, turn hwp on, save, and upload the file again from **Media**. Since 3.0.0, hwp files that were rejected because WordPress detected a different type from the file content are also allowed.
 
-= 블록 에디터(구텐베르크)에서 올리는 파일에도 적용되나요? =
+= Does it also apply to files uploaded in the block editor? =
 
-네. 3.0.0 부터 블록 에디터에서 올리는 파일에도 같은 설정이 적용됩니다.
+Yes. Since 3.0.0 the same settings apply to files uploaded in the block editor.
 
-= 문의 및 건의 =
+= Questions and suggestions =
 
-버그나 추가하고 싶은 파일 타입이 있다면 [블로그 플러그인 소개글](https://in-web.co.kr/wordpress/plug-in/wordpress-%ec%97%85%eb%a1%9c%eb%93%9c-%ed%99%95%ec%9e%a5%ec%9e%90-%ec%b6%94%ea%b0%80-rocket-media-library-mime-type/) 에 댓글을 남기거나 [깃허브 이슈](https://github.com/qwerty23/rocket-media-library-mime-type/issues) 로 알려 주세요.
+If you find a bug or want another file type added, leave a comment on the [plugin page on my blog](https://in-web.co.kr/wordpress/plug-in/wordpress-%ec%97%85%eb%a1%9c%eb%93%9c-%ed%99%95%ec%9e%a5%ec%9e%90-%ec%b6%94%ea%b0%80-rocket-media-library-mime-type/) or open a [GitHub issue](https://github.com/qwerty23/rocket-media-library-mime-type/issues).
 
 == Screenshots ==
 
-1. 업로드 파일 타입 설정 화면입니다. 아직 hwp 파일은 선택하지 않은 상태입니다.
-2. hwp 파일 타입은 1의 화면에서 선택하지 않았기 때문에 업로드되지 않습니다.
-3. hwp 파일을 업로드 허용으로 선택한 화면입니다.
-4. 3의 화면에서 허용으로 선택했기 때문에 hwp 파일도 업로드됩니다.
-5. 한글 파일명을 로마자로 변환하는 기능을 켜고 한글 이름의 파일을 올려 로마자 이름으로 변환한 모습입니다.
-6. 업로드 일시를 붙이는 옵션을 함께 켠 모습입니다.
+1. The upload file type settings screen. The hwp file type is not selected yet.
+2. The hwp file is not uploaded because its type was not selected in screen 1.
+3. The screen with the hwp file type allowed.
+4. The hwp file is uploaded because it was allowed in screen 3.
+5. A Korean file name converted to a Latin name after turning on the romanization option.
+6. The same with the option that appends the upload date and time.
 
 == Changelog ==
 
+= 3.0.1 =
+* fix : File type settings were reset when the plugin was deactivated and activated again.
+* fix : Types that WordPress allows by default (doc, xlsx, pptx, csv, bmp, ico, mp4, txt and others) are on by default on a fresh install.
+* fix : File name conversion applies only to uploads, and no longer leaves `%xx` in URLs for letters that cannot be romanized.
+* fix : The plugin no longer allows a file type that another plugin or form has deliberately excluded for a specific upload.
+* fix : Removed the use of `seems_utf8()`, which is deprecated since WordPress 6.9.
+* change : The readme is now written in English (with a short Korean summary), as required by WordPress.org.
+* change : `uninstall.php` no longer creates global variables.
+
 = 3.0.0 =
-* security : **로그인하지 않은 사용자도 설정을 바꿀 수 있던 문제를 고쳤습니다.** 설정 저장에 권한 확인과 nonce 확인을 추가했습니다. 반드시 업데이트해 주세요.
-* security : 설정 화면의 모든 출력을 이스케이프하고, 저장하는 값을 항목별로 검증합니다.
-* security : svg, exe, 매크로 파일에 주의 문구를 표시하고, **위험한 형식은 관리자만 업로드**하도록 제한하는 옵션을 추가했습니다(기본 켜짐).
-* change : "업로드 일시 붙이기"가 한글 변환과 관계없이 **모든 파일에 적용되는 별개의 옵션**이 되었습니다(기본 꺼짐). 한글 변환을 쓰지 않던 사이트의 파일명이 갑자기 바뀌지 않도록, 업데이트할 때 이런 사이트는 이 옵션을 꺼 둡니다.
-* new : 맥(macOS)에서 올린 자음, 모음이 분리된 한글 파일명을 정상적인 한글로 합치는 옵션을 추가했습니다.
-* change : 화면 아래에 저장 바를 고정했고, 저장하지 않은 변경 사항이 있으면 알려 줍니다.
-* fix : 스위치를 끄고 저장해도 꺼지지 않던 문제.
-* fix : 블록 에디터(REST API)에서 올리는 파일에는 설정이 적용되지 않던 문제.
-* fix : 사이트의 PHP 시간대를 바꾸던 코드를 제거했습니다 (업로드 일시는 사이트 시간대로 표시).
-* fix : xlsx 의 기본값 오류.
-* change : 설정 화면의 모양은 예전 버전과 같게 유지합니다. 외부 CDN 에서 불러오던 라이브러리(Foundation, Font Awesome 등)는 **플러그인에 포함**해서 사용하므로 설정 화면이 외부 사이트에서 파일을 불러오지 않습니다.
-* change : **한글 파일명 변환을 로마자 변환으로 바꾸고 네이버 파파고 번역 옵션을 없앴습니다.** 파파고 무료 API 가 2024년 2월에 종료되었고, 로마자 변환은 외부 서비스, API 키, 비용이 필요 없습니다. 예) 사과.jpg > sagwa.jpg. 예전에 저장한 API 키는 업데이트 시 자동으로 지웁니다.
-* change : 한글 판별을 한글 완성형과 자모로 한정했습니다. (이전에는 한자 등도 한글로 판단)
-* change : PHP 7.0 이상, 워드프레스 5.0 이상.
-* add : 플러그인 삭제 시 설정을 정리합니다.
+* security : **Fixed an issue that allowed users who were not logged in to change the settings.** Saving settings now checks capability and nonce. Please update.
+* security : All output of the settings screen is escaped, and each saved value is validated.
+* fix : File type settings were reset when the plugin was deactivated and activated again.
+* fix : File types that WordPress allows by default (doc, xlsx, pptx, csv, bmp, ico, mp4, txt and others) were blocked on a fresh install. The defaults now match WordPress.
+* fix : File name conversion is applied only when a file is uploaded (other file name handling is not affected). Also fixed broken file URLs caused by letters that cannot be romanized.
+* security : Added warnings for svg, exe and macro-enabled files, and an option (on by default) to let only administrators upload risky file types.
+* change : "Append upload date and time" is now a separate option that applies to all files, regardless of Korean conversion (off by default). When updating, it is turned off for sites that did not use the Korean conversion, so existing file names do not suddenly change.
+* new : Added an option that combines Korean file names split into consonants and vowels (uploaded from macOS) into normal Korean.
+* change : A save bar is fixed at the bottom of the screen and warns about unsaved changes.
+* fix : Switches that were turned off were not saved as off.
+* fix : Settings were not applied to files uploaded from the block editor (REST API).
+* fix : Removed code that changed the PHP time zone of the site. The upload date and time use the site time zone.
+* fix : Wrong default for xlsx.
+* change : The settings screen keeps the same look as before. Libraries previously loaded from external CDNs (Foundation, Font Awesome and others) are now **bundled with the plugin**, so the settings screen loads nothing from external sites.
+* change : **Korean file name conversion now uses romanization, and the Naver Papago translation option was removed.** The free Papago API ended in February 2024. Romanization needs no external service, API key or fee. Example: 사과.jpg to sagwa.jpg. Previously saved API keys are deleted automatically on update.
+* change : Korean detection is limited to Hangul syllables and jamo (Hanja and others were treated as Korean before).
+* change : Requires PHP 7.0 or later and WordPress 5.0 or later.
+* add : Settings are cleaned up when the plugin is deleted.
 
 = 2.1.0 =
-* fix : 번역 API 변경 (네이버 > 네이버 파파고)
-* fix : 한글 파일일 경우 영문으로 번역한 후에 스페이스, 대쉬 문자를 없애도록 변경
+* fix : Changed the translation API (Naver to Naver Papago).
+* fix : For Korean files, spaces and dashes are removed after translating to English.
 
 = 2.0.1 =
-* 파일 타입 추가 : svg, json
+* Added file types: svg, json
 
 = 2.0.0 =
-* 파일 타입 추가 : txt, xlsx
-* 한글 파일명 파일 영문으로 자동 변환 기능 추가
-* 네이버 번역 API를 사용한 한글 파일명 파일 영문으로 자동 변환 기능 추가
+* Added file types: txt, xlsx
+* Added automatic conversion of Korean file names to English.
+* Added Korean file name conversion using the Naver translation API.
 
 = 1.1.0 =
-* 미디어 > 파일 확장자 필터 (지정한 확장자 파일 목록 보기) 기능 추가
+* Added a file extension filter to Media (show only files with a chosen extension).
 
 = 1.0.1 =
-* 파일 타입 추가 : ai, eps, ps
+* Added file types: ai, eps, ps
 
 = 1.0.0 =
-* 파일 타입 추가 : webm, ogv, csv
-* 아이콘이 깨져서 나오는 현상 수정
+* Added file types: webm, ogv, csv
+* Fixed broken icons.
 
 = 0.0.1 =
-* 첫 버전
+* First version
 
 == Upgrade Notice ==
 
+= 3.0.1 =
+Minor maintenance update. If you are updating from 2.x, see the 3.0.0 notes: users who were not logged in could change the settings in older versions.
+
 = 3.0.0 =
-보안 업데이트입니다. 네이버 파파고 번역 옵션은 없어지고 한글 파일명은 로마자로 변환됩니다. 이전 버전에서는 로그인하지 않은 사용자도 설정을 바꿀 수 있었습니다. 반드시 업데이트해 주세요. 업데이트 후 설정 화면에서 허용할 파일 타입을 한 번 확인하고 저장해 주세요.
+Security update. Before this version, users who were not logged in could change the settings. The Naver Papago option is removed; Korean file names are romanized. Please update and review your settings.

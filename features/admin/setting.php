@@ -28,7 +28,7 @@ class Setting extends Feature {
 	public function add_menu() {
 		$this->page_hook = add_options_page(
 			'Rocket Media Library Mime Type',
-			__( '업로드 파일 타입', PLUGIN_PREFIX ),
+			__( '업로드 파일 타입', 'rocket-media-library-mime-type' ),
 			'manage_options',
 			PLUGIN_MENU_SLUG,
 			array( $this, 'setting_page' )
@@ -46,12 +46,12 @@ class Setting extends Feature {
 			return;
 		}
 
-		if ( 'update' !== $_POST['rocket_mlmt_action'] || PLUGIN_MENU_SLUG !== sanitize_text_field( wp_unslash( $_GET['page'] ) ) ) {
+		if ( 'update' !== sanitize_text_field( wp_unslash( $_POST['rocket_mlmt_action'] ) ) || PLUGIN_MENU_SLUG !== sanitize_text_field( wp_unslash( $_GET['page'] ) ) ) {
 			return;
 		}
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( '이 설정을 변경할 권한이 없습니다.', PLUGIN_PREFIX ), '', array( 'response' => 403 ) );
+			wp_die( esc_html__( '이 설정을 변경할 권한이 없습니다.', 'rocket-media-library-mime-type' ), '', array( 'response' => 403 ) );
 		}
 
 		check_admin_referer( self::NONCE_ACTION, self::NONCE_NAME );
@@ -76,7 +76,7 @@ class Setting extends Feature {
 	public function setting_page() {
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( '이 페이지에 접근할 권한이 없습니다.', PLUGIN_PREFIX ), '', array( 'response' => 403 ) );
+			wp_die( esc_html__( '이 페이지에 접근할 권한이 없습니다.', 'rocket-media-library-mime-type' ), '', array( 'response' => 403 ) );
 		}
 
 		$template = self::get_template();
@@ -84,7 +84,7 @@ class Setting extends Feature {
 		$template->set( 'version', VERSION );
 		$template->set( 'options', self::get_current_all_options() );
 		$template->set( 'rocket_plugin_mime_types', MimeType::get_mime_types() );
-		$template->set( 'updated', isset( $_GET['updated'] ) && '1' === $_GET['updated'] );
+		$template->set( 'updated', isset( $_GET['updated'] ) && '1' === $_GET['updated'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- 표시용 값
 		$template->set( 'nonce_action', self::NONCE_ACTION );
 		$template->set( 'nonce_name', self::NONCE_NAME );
 		$template->set( 'form_action', admin_url( 'options-general.php?page=' . PLUGIN_MENU_SLUG ) );

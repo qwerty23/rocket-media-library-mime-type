@@ -6,12 +6,22 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-$rocket_mlmt_key = 'rocket_media_library_mime_type';
+/**
+ * 함수 안에서 실행해서 전역 변수를 만들지 않는다
+ */
+function rocket_media_library_mime_type_uninstall() {
 
-if ( is_multisite() ) {
-	foreach ( get_sites( array( 'fields' => 'ids', 'number' => 0 ) ) as $rocket_mlmt_site_id ) {
-		delete_blog_option( $rocket_mlmt_site_id, $rocket_mlmt_key );
+	$option_key = 'rocket_media_library_mime_type';
+
+	if ( is_multisite() ) {
+		foreach ( get_sites( array( 'fields' => 'ids', 'number' => 0 ) ) as $site_id ) {
+			delete_blog_option( $site_id, $option_key );
+			delete_blog_option( $site_id, $option_key . '_db' );
+		}
 	}
+
+	delete_option( $option_key );
+	delete_option( $option_key . '_db' );
 }
 
-delete_option( $rocket_mlmt_key );
+rocket_media_library_mime_type_uninstall();

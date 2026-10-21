@@ -19,7 +19,9 @@ class Upload extends Feature {
 	public function __construct() {
 		$this->add_filter( 'upload_mimes', 'custom_add_upload_mimes' );
 		$this->add_filter( 'post_mime_types', 'media_filter_allow_mime_types' );
-		$this->add_filter( 'sanitize_file_name', 'rocket_sanitize_chars' );
+		// 파일을 올릴 때만 이름을 바꾼다 (다른 용도의 sanitize_file_name 호출에는 영향을 주지 않는다)
+		$this->add_filter( 'wp_handle_upload_prefilter', 'prefilter_upload' );
+		$this->add_filter( 'wp_handle_sideload_prefilter', 'prefilter_upload' );
 		$this->add_filter( 'wp_check_filetype_and_ext', 'fix_filetype_and_ext', 10, 5 );
 	}
 
@@ -110,6 +112,11 @@ class Upload extends Feature {
 				continue;
 			}
 
+			// 호출한 쪽이 허용 형식을 제한한 경우(예: 이미지만 받는 업로드 양식)에는 그 목록을 벗어나지 않는다
+			if ( is_array( $mimes ) && ! isset( $mimes[ $info['extension'] ] ) ) {
+				continue;
+			}
+
 			if ( in_array( $extension, explode( '|', $info['extension'] ), true ) && in_array( $real_mime, $info['real_mimes'], true ) ) {
 				$data['ext']  = $extension;
 				$data['type'] = $info['mime_type'];
@@ -136,8 +143,16 @@ class Upload extends Feature {
 			$post_mime_types[ $mime_type ] = array(
 				$label,
 				/* translators: %s: file extensions */
-				sprintf( __( 'Manage %s', PLUGIN_PREFIX ), $label ),
-				_n_noop( $label . ' <span class="count">(%s)</span>', $label . ' <span class="count">(%s)</span>' ),
+				sprintf( __( 'Manage %s', 'rocket-media-library-mime-type' ), $label ),
+				// _n_noop() 과 같은 형태의 값 (번역 대상이 아닌 확장자 이름이라 직접 만든다)
+				array(
+					0          => $label . ' <span class="count">(%s)</span>',
+					1          => $label . ' <span class="count">(%s)</span>',
+					'singular' => $label . ' <span class="count">(%s)</span>',
+					'plural'   => $label . ' <span class="count">(%s)</span>',
+					'context'  => null,
+					'domain'   => null,
+				),
 			);
 		}
 
@@ -145,7 +160,22 @@ class Upload extends Feature {
 	}
 
 	/**
-	 * 파일 업로드시 실행되는  워드프레스 필터중 하나 sanitize_file_name 를 사용
+	 * 업로드 직전에 파일 이름을 바꾼다 (미디어 화면, 블록 에디터 모두 이 필터를 거친다)
+	 *
+	 * @param array $file 업로드 파일 정보 (name, tmp_name ...)
+	 * @return array
+	 */
+	public function prefilter_upload( $file ) {
+
+		if ( is_array( $file ) && isset( $file['name'] ) && is_string( $file['name'] ) ) {
+			$file['name'] = $this->rocket_sanitize_chars( $file['name'] );
+		}
+
+		return $file;
+	}
+
+	/**
+	 * 파일 업로드시 파일 이름을 바꾼다 (prefilter_upload 에서 호출)
 	 * 1. 파일명이 한글인지 확인 후
 	 * 2. 한글이면 로마자로 바꾼 파일명을 반환 (ex:사과->sagwa)
 	 *
@@ -163,7 +193,7 @@ class Upload extends Feature {
 			return $filename;
 		}
 
-		if ( empty( $filename ) || ! seems_utf8( $filename ) ) {
+		if ( empty( $filename ) || ! $this->is_valid_utf8( $filename ) ) {
 			return $filename;
 		}
 
@@ -192,6 +222,9 @@ class Upload extends Feature {
 			 */
 			$fname = sanitize_title_with_dashes( Romanizer::romanize( $fname ) );
 
+			// 로마자로 바꿀 수 없는 글자(자모 단독, 한자 등)는 주소용 %xx 로 남으므로 지운다
+			$fname = trim( preg_replace( '/%[0-9a-f]{2}/i', '', $fname ), '-_' );
+
 			// 남은 글자가 없으면(한자만 있는 이름 등) 임의의 영숫자로 변환
 			if ( '' === $fname ) {
 				$fname = strtolower( wp_generate_password( 18, false, false ) );
@@ -204,6 +237,13 @@ class Upload extends Feature {
 		}
 
 		return $fname . ( $extension ? '.' . $extension : '' );
+	}
+
+	/**
+	 * UTF-8 로 올바른 문자열인지 (워드프레스 6.9 부터 seems_utf8 대신 wp_is_valid_utf8 사용)
+	 */
+	private function is_valid_utf8( $text ) {
+		return function_exists( 'wp_is_valid_utf8' ) ? wp_is_valid_utf8( $text ) : ( 1 === preg_match( '//u', $text ) );
 	}
 
 	/**

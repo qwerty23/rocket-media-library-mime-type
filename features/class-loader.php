@@ -26,7 +26,7 @@ class ClassLoader {
 			$load_list = array_merge( $load_list, self::glob_php( PLUGIN_DIR . 'features/client' ) );
 		}
 		foreach ( $load_list as $file ) {
-			include $file;
+			include_once $file;
 		}
 	}
 
