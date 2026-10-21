@@ -16,23 +16,31 @@
 .rocket-mlmt-scope .row{max-width:none;}
 .rocket-mlmt-scope table{width:100%;}
 .rocket-mlmt-scope .custom-label{font-size:1.5rem;}
-.rocket-mlmt-scope .switch-on {
+/* 스위치의 Yes / No 글자 : 켜짐이면 왼쪽에 Yes, 꺼짐이면 오른쪽에 No 를 막대 가운데 높이에 보여 준다 */
+.rocket-mlmt-scope .switch-on,
+.rocket-mlmt-scope .switch-off {
 	position: absolute;
-	left: -55px;
-	top: 10px;
-	color: white;
+	top: 0;
+	line-height: 2rem;
+	text-indent: 0;
 	font-weight: bold;
-	font-size: 9px;
+	font-size: 10px;
+	pointer-events: none;
+}
+
+.rocket-mlmt-scope .switch-on {
+	left: .7rem;
+	color: #fff;
+	display: none;
 }
 
 .rocket-mlmt-scope .switch-off {
-	position: absolute;
-	left: -25px;
-	top: 10px;
-	color: white;
-	font-weight: bold;
-	font-size: 9px;
+	right: .7rem;
+	color: #666;
 }
+
+.rocket-mlmt-scope .switch input:checked + label .switch-on { display: block; }
+.rocket-mlmt-scope .switch input:checked + label .switch-off { display: none; }
 .rocket-mlmt-scope input[type="text"],.rocket-mlmt-scope input[type="password"],.rocket-mlmt-scope .switch{margin:inherit;}
 
 /* 한글은 글자 중간이 아니라 띄어쓰기(단어) 단위로 줄을 바꾼다 */
