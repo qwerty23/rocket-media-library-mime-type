@@ -3,7 +3,7 @@
  * Plugin Name:       Rocket Media Library Mime Type
  * Plugin URI:        http://in-web.co.kr/wordpress/plug-in/wordpress-%ec%97%85%eb%a1%9c%eb%93%9c-%ed%99%95%ec%9e%a5%ec%9e%90-%ec%b6%94%ea%b0%80-rocket-media-library-mime-type/
  * Description:       한국 유저를 위한 업로드 파일타입 추가 플러그인. hwp 확장자 및 미디어에 업로드하길 원하는 파일 타입을 추가할 수 있습니다. (Choose which file types can be uploaded to the media library.)
- * Version:           3.0.1
+ * Version:           3.0.2
  * Requires at least: 5.0
  * Requires PHP:      7.0
  * Author:            Qwerty23
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // 직접 접근 차단
 }
 
-define( 'rocket_media_library_mime_type\VERSION', '3.0.1' );
+define( 'rocket_media_library_mime_type\VERSION', '3.0.2' );
 define( 'rocket_media_library_mime_type\PLUGIN_FILE', __FILE__ );
 define( 'rocket_media_library_mime_type\PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'rocket_media_library_mime_type\PLUGIN_URL', plugin_dir_url( __FILE__ ) );

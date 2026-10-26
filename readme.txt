@@ -1,10 +1,10 @@
 === Rocket Media Library Mime Type ===
-Contributors: Qwerty23
+Contributors: qwerty-23
 Tags: upload, file type, mime type, hwp, korean
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,11 @@ If you find a bug or want another file type added, leave a comment on the [plugi
 
 == Changelog ==
 
+= 3.0.2 =
+* security : Re-confirmed that saving the settings is protected against Cross-Site Request Forgery (CSRF): it requires a logged-in user with the `manage_options` capability and a valid nonce.
+* fix : Fixed the position of the Yes / No labels on the switches of the settings screen.
+* change : The readme now lists the WordPress.org user name `qwerty-23` as contributor.
+
 = 3.0.1 =
 * fix : File type settings were reset when the plugin was deactivated and activated again.
 * fix : Types that WordPress allows by default (doc, xlsx, pptx, csv, bmp, ico, mp4, txt and others) are on by default on a fresh install.
@@ -132,6 +137,9 @@ If you find a bug or want another file type added, leave a comment on the [plugi
 * First version
 
 == Upgrade Notice ==
+
+= 3.0.2 =
+Security update. Settings changes require a logged-in administrator and a valid nonce (CSRF fix). Please update.
 
 = 3.0.1 =
 Minor maintenance update. If you are updating from 2.x, see the 3.0.0 notes: users who were not logged in could change the settings in older versions.
