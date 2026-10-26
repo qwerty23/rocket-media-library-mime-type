@@ -1,0 +1,13 @@
+# wordpress.org 의 plugin 폴더(trunk)에 올리지 않을 파일
+.git
+.github
+.gitignore
+.gitattributes
+.distignore
+.vscode
+.wordpress-org
+node_modules
+*.zip
+README.md
+# 스크린샷은 .wordpress-org 폴더에서 assets 로 올라간다
+assets/images
