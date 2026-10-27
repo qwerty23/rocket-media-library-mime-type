@@ -21,6 +21,8 @@ A small plugin that collects useful upload-related features. It has four main fe
 
 = 한국어 안내 =
 
+보안 문제 수정 및 서비스가 종료된 파파고 API 옵션은 삭제했습니다. 대신 외부 API 없이 한글을 영어로 변경하는 옵션으로 대체했습니다. 기존 버전과 크게 달라지지는 않았지만 오류나 버그를 발견했다면 알려주시면 감사하겠습니다.
+
 워드프레스 업로드와 관련된 기능을 모은 플러그인입니다. 설정은 **설정 > 업로드 파일 타입**에서 합니다.
 
 * 업로드를 허용할 파일 타입 선택 (hwp, svg, csv 등)
